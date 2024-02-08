@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss"
 
+
 const config = {
   darkMode: ["class"],
   content: [
@@ -17,7 +18,8 @@ const config = {
         "2xl": "1400px",
       },
     },
-    extend: {
+    extend: {       
+
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
