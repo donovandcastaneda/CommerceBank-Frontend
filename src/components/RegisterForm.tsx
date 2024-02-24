@@ -18,6 +18,10 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 
 const FormSchema = z.object({
+  email: z.string()
+  .min(7, "Username must be at least 7 characters.")
+  .email("Must be valid email"),
+
   username: z.string().min(7, {
     message: "Username must be at least 7 characters.",
   }),
@@ -36,6 +40,7 @@ export default function RegisterForm() {
     z.infer<typeof FormSchema>>({
       resolver: zodResolver(FormSchema),
       defaultValues: {
+        email: "",
         username: "",
         password: "",
         // confirm: "",
@@ -51,6 +56,24 @@ export default function RegisterForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
         <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="email"
+                  {...field}
+                  type="email"
+                  onChange={field.onChange}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+         <FormField
           control={form.control}
           name="username"
           render={({ field }) => (

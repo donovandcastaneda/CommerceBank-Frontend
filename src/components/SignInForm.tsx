@@ -30,7 +30,7 @@ const FormSchema = z.object({
   // }),
 });
 
-export default function RegisterForm() {
+export default function SignInForm() {
   const form =
     useForm <
     z.infer<typeof FormSchema>>({
