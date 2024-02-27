@@ -43,7 +43,6 @@ export default function SignInForm() {
     });
 
   function onSubmit(values: z.infer<typeof FormSchema>) {
-    console.log(values);
   }
 
   return (

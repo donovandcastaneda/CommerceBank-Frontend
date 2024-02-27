@@ -26,7 +26,7 @@ const page: FC<pageProps> = ({}) => {
           Home
         </Link>
 
-        <div className=" relative bg-white bg-opacity-30 shadow-lg rounded-3xl p-20 bg-clip-padding border border-gray-200 backdrop-blur-lg backdrop-filter">
+        <div className=" relative bg-white bg-opacity-30 shadow-lg rounded-3xl py-20 px-36 bg-clip-padding border border-gray-200 backdrop-blur-lg backdrop-filter">
           <div className="">
             <RegisterForm />
           </div>
