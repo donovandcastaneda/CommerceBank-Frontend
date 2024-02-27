@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { buttonVariants } from "./ui/button";
-import AuthContext from "./auth-content";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -14,7 +13,6 @@ const Navbar = () => {
         <Link href="/" className="z-40 flex font-semibold text-white whitespace-nowrap">
           Commerce Bank
         </Link>
-        <AuthContext/>
         <div className="sm:hidden flex items-center">
           <button onClick={() => setToggleMenu(!toggleMenu)}>
             {toggleMenu ? (

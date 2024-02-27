@@ -1,6 +1,7 @@
 "use client";
 import GoBackButton from "@/components/GoBackButton";
 import RegisterForm from "@/components/RegisterForm";
+import AuthContent from "@/components/auth/auth-content";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronLeft } from "lucide-react";
