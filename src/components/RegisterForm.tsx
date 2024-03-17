@@ -46,7 +46,6 @@ export default function RegisterForm() {
       defaultValues: {
         firstName:"",
         lastName:"",
-        email: "",
         username: "",
         password: "",
         // confirm: "",
@@ -69,7 +68,7 @@ export default function RegisterForm() {
               <FormLabel>First Name</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="first name"
+                  placeholder="First Name"
                   {...field}
                   type="firstName"
                   onChange={field.onChange}
@@ -87,27 +86,9 @@ export default function RegisterForm() {
               <FormLabel>Last Name</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="last name"
+                  placeholder="Last Name"
                   {...field}
                   type="lastName"
-                  onChange={field.onChange}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="email"
-                  {...field}
-                  type="email"
                   onChange={field.onChange}
                 />
               </FormControl>
@@ -123,7 +104,7 @@ export default function RegisterForm() {
               <FormLabel>Username</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="username"
+                  placeholder="Username"
                   {...field}
                   type="username"
                   onChange={field.onChange}
@@ -141,7 +122,7 @@ export default function RegisterForm() {
               <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="password"
+                  placeholder="Password"
                   {...field}
                   type="password"
                   onChange={field.onChange}

@@ -57,7 +57,7 @@ export default function SignInForm() {
               <FormLabel>Username</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="username"
+                  placeholder="Username"
                   {...field}
                   type="username"
                   onChange={field.onChange}
@@ -75,7 +75,7 @@ export default function SignInForm() {
               <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="password"
+                  placeholder="Password"
                   {...field}
                   type="password"
                   onChange={field.onChange}
@@ -106,7 +106,7 @@ export default function SignInForm() {
           )}
         /> */}
         <Button type="submit" className="w-full flex gap-2">
-          Register
+          Sign In
         </Button>
       </form>
     </Form>
