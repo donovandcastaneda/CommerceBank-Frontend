@@ -40,9 +40,9 @@ const Navbar = () => {
         </div>
         {/* Desktop Menu - Always visible on medium screens and up */}
         <div className="hidden sm:flex items-center space-x-4">
-          <Credenza>
+        <Credenza>
             <CredenzaTrigger asChild>
-              <Button>Sign In</Button>
+              <Button variant="secondary">Sign In</Button>
             </CredenzaTrigger>
             <CredenzaContent>
               <CredenzaHeader>
@@ -63,7 +63,7 @@ const Navbar = () => {
           </Credenza>
           <Credenza>
             <CredenzaTrigger asChild>
-              <Button>Register <ArrowRight className="ml-1.5 h-5 w-5" /></Button>
+              <Button >Register <ArrowRight className="ml-1.5 h-5 w-5" /></Button>
             </CredenzaTrigger>
             <CredenzaContent>
               <CredenzaHeader>
@@ -84,7 +84,55 @@ const Navbar = () => {
           </Credenza>
         </div>
 
-        
+        {/* Mobile Menu - Toggled visibility */}
+        <div
+          className={`${
+            toggleMenu ? "flex" : "hidden"
+          } sm:hidden absolute top-full left-0 w-full bg-zinc-200 flex-col items-center py-4 space-y-3`}
+        >
+           <Credenza>
+            <CredenzaTrigger asChild>
+              <Button variant="secondary" >Sign In</Button>
+            </CredenzaTrigger>
+            <CredenzaContent>
+              <CredenzaHeader>
+                <CredenzaTitle>Sign In</CredenzaTitle>
+                <CredenzaDescription>
+                  Log in to bank with Commerce Bank
+                </CredenzaDescription>
+              </CredenzaHeader>
+              <CredenzaBody>
+              <SignInForm />
+              </CredenzaBody>
+              <CredenzaFooter>
+                <CredenzaClose asChild>
+                  <Button variant="outline">Close</Button>
+                </CredenzaClose>
+              </CredenzaFooter>
+            </CredenzaContent>
+          </Credenza>
+          <Credenza>
+            <CredenzaTrigger asChild>
+              <Button>Register</Button>
+            </CredenzaTrigger>
+            <CredenzaContent>
+              <CredenzaHeader>
+                <CredenzaTitle>Register </CredenzaTitle>
+                <CredenzaDescription>
+                  Register a account to bank with Commerce Bank.
+                </CredenzaDescription>
+              </CredenzaHeader>
+              <CredenzaBody>
+                <RegisterForm/>
+              </CredenzaBody>
+              <CredenzaFooter>
+                <CredenzaClose asChild>
+                  <Button variant="outline">Close</Button>
+                </CredenzaClose>
+              </CredenzaFooter>
+            </CredenzaContent>
+          </Credenza>
+        </div>
       </div>
     </nav>
   );
