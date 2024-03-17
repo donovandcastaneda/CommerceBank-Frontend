@@ -88,7 +88,7 @@ const Navbar = () => {
         <div
           className={`${
             toggleMenu ? "flex" : "hidden"
-          } sm:hidden absolute top-full left-0 w-full bg-zinc-200 flex-col items-center py-4 space-y-3`}
+          } sm:hidden absolute top-full left-0 w-full bg-zinc-300 flex-col items-center py-4 space-y-3`}
         >
            <Credenza>
             <CredenzaTrigger asChild>
