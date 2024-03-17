@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        <div vaul-drawer-wrapper="" className="bg-background">
+        <div>
           {children}
         </div>{" "}
         <Footer />
