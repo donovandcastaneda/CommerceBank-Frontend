@@ -16,6 +16,9 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import axios from "axios";
+import { setAuthHeader } from "@/lib/helpers/axios_helper";
+import { useState } from "react";
 
 const FormSchema = z.object({
   username: z.string().min(7, {
@@ -42,8 +45,37 @@ export default function SignInForm() {
       },
     });
 
-  function onSubmit(values: z.infer<typeof FormSchema>) {
+    const [isLoading, setIsLoading] = useState(false); 
+
+
+    async function onLogin(values: any) {
+
+      setIsLoading(true); 
+
+      try {
+          const response = await axios.post("/login", values);
+  
+          if (response.status === 200) {
+              setAuthHeader(response.data.token);
+              toast({ title: "Login successful!"}); // Show success toast
+          } else {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+   
+      } catch (error) {
+          setAuthHeader(null);
+          console.error("Login failed:", error);
+          toast({ title: "Login failed", variant: "destructive" }); // Show error toast
+  
+      }
+      finally {
+        setIsLoading(false); // End loading
+      }
   }
+  
+    function onSubmit(values: any) {
+      onLogin(values);
+    }
 
   return (
 
@@ -105,9 +137,10 @@ export default function SignInForm() {
             </FormItem>
           )}
         /> */}
-        <Button type="submit" className="w-full flex gap-2">
-          Sign In
-        </Button>
+        <Button type="submit" className="w-full flex gap-2" disabled={isLoading}>
+  {isLoading ? <Loader2 className="animate-spin" /> : 'Sign In'}
+</Button>
+
       </form>
     </Form>
   
