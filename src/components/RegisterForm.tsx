@@ -13,25 +13,27 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { toast } from "@/components/ui/use-toast";
+import { toast, useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import {
+  getAuthToken,
+  request,
+  setAuthHeader,
+} from "@/lib/helpers/axios_helper";
+import axios from "axios";
+import { Toast } from "./ui/toast";
 
 const FormSchema = z.object({
-  firstName:z.string().min(4, 'must be at least 4 characters'),
-
-  lastName: z.string().min(4, 'must be at least 4 characters'),
-
-  email: z.string()
-  .min(7, "Username must be at least 7 characters.")
-  .email("Must be valid email"),
-
+  firstName: z.string().min(4, "must be at least 4 characters"),
+  lastName: z.string().min(4, "must be at least 4 characters"),
   username: z.string().min(7, {
     message: "Username must be at least 7 characters.",
   }),
   password: z.string().min(7, {
     message: "Username must be at least 7 characters.",
   }),
+  role: z.string()
   // .refine((data) => data.confirm === data.password, {
   //   message: "Password did not match",
   //   path: ["confirm"],
@@ -39,28 +41,50 @@ const FormSchema = z.object({
 });
 
 export default function RegisterForm() {
-  const form =
-    useForm <
-    z.infer<typeof FormSchema>>({
-      resolver: zodResolver(FormSchema),
-      defaultValues: {
-        firstName:"",
-        lastName:"",
-        username: "",
-        password: "",
-        // confirm: "",
-      },
-    });
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      username: "",
+      password: "",
+      role: "USER"
+      // confirm: "",
+    },
+  });
 
-  function onSubmit(values: z.infer<typeof FormSchema>) {
-    console.log(values);
+  const { toast } = useToast()
+
+
+
+  async function onRegister(values: any) {
+
+    try {
+        const response = await axios.post("/register", values);
+
+        if (response.status === 200) {
+            setAuthHeader(response.data.token);
+            toast({ title: "Registration successful!"}); // Show success toast
+        } else {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+ 
+    } catch (error) {
+        setAuthHeader(null);
+        console.error("Registration failed:", error);
+        toast({ title: "Registration failed", variant: "destructive" }); // Show error toast
+
+    }
+}
+
+  function onSubmit(values: any) {
+    onRegister(values);
   }
 
   return (
-
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className=" space-y-6">
-      <FormField
+        <FormField
           control={form.control}
           name="firstName"
           render={({ field }) => (
@@ -78,7 +102,7 @@ export default function RegisterForm() {
             </FormItem>
           )}
         />
-         <FormField
+        <FormField
           control={form.control}
           name="lastName"
           render={({ field }) => (
@@ -96,7 +120,7 @@ export default function RegisterForm() {
             </FormItem>
           )}
         />
-         <FormField
+        <FormField
           control={form.control}
           name="username"
           render={({ field }) => (
@@ -157,7 +181,5 @@ export default function RegisterForm() {
         </Button>
       </form>
     </Form>
-  
-
   );
 }
