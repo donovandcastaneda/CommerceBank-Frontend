@@ -23,6 +23,8 @@ import {
 } from "@/lib/helpers/axios_helper";
 import axios from "axios";
 import { Toast } from "./ui/toast";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
   firstName: z.string().min(4, "must be at least 4 characters"),
@@ -33,7 +35,9 @@ const FormSchema = z.object({
   password: z.string().min(7, {
     message: "Username must be at least 7 characters.",
   }),
-  role: z.string()
+  role: z.string(),
+  balance: z.number()
+
   // .refine((data) => data.confirm === data.password, {
   //   message: "Password did not match",
   //   path: ["confirm"],
@@ -48,16 +52,22 @@ export default function RegisterForm() {
       lastName: "",
       username: "",
       password: "",
-      role: "USER"
+      role: "USER",
+      balance: 10000
+
       // confirm: "",
     },
   });
 
   const { toast } = useToast()
+  const [isLoading, setIsLoading] = useState(false); 
+  const router = useRouter(); // Initialize useRouter
+
 
 
 
   async function onRegister(values: any) {
+    setIsLoading(true)
 
     try {
         const response = await axios.post("/register", values);
@@ -65,6 +75,8 @@ export default function RegisterForm() {
         if (response.status === 200) {
             setAuthHeader(response.data.token);
             toast({ title: "Registration successful!"}); // Show success toast
+            const id = response.data.id;
+            router.push(`/dashboard/${id}`);
         } else {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -74,6 +86,9 @@ export default function RegisterForm() {
         console.error("Registration failed:", error);
         toast({ title: "Registration failed", variant: "destructive" }); // Show error toast
 
+    }
+    finally {
+      setIsLoading(false); // End loading
     }
 }
 
@@ -176,9 +191,9 @@ export default function RegisterForm() {
             </FormItem>
           )}
         /> */}
-        <Button type="submit" className="w-full flex gap-2">
-          Register
-        </Button>
+         <Button type="submit" className="w-full flex gap-2" disabled={isLoading}>
+  {isLoading ? <Loader2 className="animate-spin" /> : 'Register'}
+</Button>
       </form>
     </Form>
   );

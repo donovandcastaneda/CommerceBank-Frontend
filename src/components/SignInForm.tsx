@@ -19,6 +19,7 @@ import { Loader2 } from "lucide-react";
 import axios from "axios";
 import { setAuthHeader } from "@/lib/helpers/axios_helper";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
   username: z.string().min(7, {
@@ -46,32 +47,44 @@ export default function SignInForm() {
     });
 
     const [isLoading, setIsLoading] = useState(false); 
+    const router = useRouter(); 
 
 
     async function onLogin(values: any) {
-
       setIsLoading(true); 
-
+  
       try {
           const response = await axios.post("/login", values);
-  
+      
+
           if (response.status === 200) {
               setAuthHeader(response.data.token);
               toast({ title: "Login successful!"}); // Show success toast
+  
+              // Check if response.data.user and response.data.user.id exist
+              if (response.data && response.data.id) {
+                  const id = response.data.id;
+                  router.push(`/dashboard/${id}`);
+              } else {
+                  // Handle the case where user or user.id is undefined
+                  console.error("Missing user data in response:", response.data);
+                  throw new Error("User data is missing in the response");
+              }
+  
           } else {
               throw new Error(`HTTP error! Status: ${response.status}`);
           }
-   
+  
       } catch (error) {
           setAuthHeader(null);
           console.error("Login failed:", error);
           toast({ title: "Login failed", variant: "destructive" }); // Show error toast
-  
       }
       finally {
-        setIsLoading(false); // End loading
+          setIsLoading(false); // End loading
       }
   }
+  
   
     function onSubmit(values: any) {
       onLogin(values);
