@@ -1,7 +1,6 @@
 "use client";
 import RegisterForm from "@/components/RegisterForm";
 import SignInForm from "@/components/SignInForm";
-import AuthContent from "@/components/auth/auth-content";
 import Image from "next/image";
 
 
