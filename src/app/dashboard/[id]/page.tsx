@@ -15,7 +15,15 @@ import { Overview } from "../components/overview";
 import { RecentTransactions } from "../components/recent-transactions";
 
 const Page = ({}) => {
-  const [userData, setUserData] = useState(null);
+
+  type UserData = {
+    firstName: string;
+    lastName: string;
+    balance: number;
+    // add other user properties as needed
+  };
+
+  const [userData, setUserData] = useState<UserData | null>(null);
   let user = useParams();
 
   useEffect(() => {
