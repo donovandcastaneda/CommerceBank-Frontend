@@ -33,7 +33,7 @@ const page: FC<pageProps> = ({}) => {
         </div>
         
       </div>
-   
+  
     </main>
   );
 };

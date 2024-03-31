@@ -20,6 +20,10 @@ const Page = ({}) => {
     firstName: string;
     lastName: string;
     balance: number;
+    totalDeposited: number;
+    totalWithdrawn: number;
+
+
     // add other user properties as needed
   };
 
@@ -32,6 +36,7 @@ const Page = ({}) => {
         const response = await axios.get(
           `http://localhost:8080/api/users/` + user.id
         );
+        console.log(response)
         setUserData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -143,7 +148,9 @@ const Page = ({}) => {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+12,234</div>
+                  <div className="text-2xl font-bold">    {userData
+                      ? `$${Number(userData.totalDeposited).toLocaleString()}`
+                      : "Loading..."}</div>
                   {/* <p className="text-xs text-muted-foreground">
                     +19% from last month
                   </p> */}
@@ -168,7 +175,9 @@ const Page = ({}) => {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+573</div>
+                  <div className="text-2xl font-bold">    {userData
+                      ? `$${Number(userData.totalWithdrawn).toLocaleString()}`
+                      : "Loading..."}</div>
                   {/* <p className="text-xs text-muted-foreground">
                     +201 since last hour
                   </p> */}
