@@ -1,33 +1,47 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
+import React, { FC, useEffect, useState } from "react";
+import axios from "axios";
+import { useRouter, useParams } from "next/navigation";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardContent,
   CardDescription,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FC } from "react";
-import { RecentTransactions } from "../components/recent-transactions";
-import { CalendarDateRangePicker } from "../components/date-range-picker";
 import { Overview } from "../components/overview";
+import { RecentTransactions } from "../components/recent-transactions";
 
-interface pageProps {
+const Page = ({}) => {
+  const [userData, setUserData] = useState(null);
+  let user = useParams();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/users/` + user.id
+        );
+        setUserData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
+    fetchData();
+  }, [user.id]);
 
-}
-
-const page: FC<pageProps> = ({}) => {
   return (
     <div className="container">
       <div className="flex-1 space-y-4 py-6 pt-6">
         <div className="flex items-center justify-between space-y-2">
-          <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-          {/* <div className="flex items-center space-x-2">
-        <CalendarDateRangePicker />
-        <Button>Download</Button>
-      </div> */}
+          <h2 className="text-3xl font-bold tracking-tight">
+            {" "}
+            Dashboard: {userData ? userData.firstName : "Loading..."}{" "}
+            {userData ? userData.lastName : ""}
+          </h2>
         </div>
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
@@ -63,16 +77,21 @@ const page: FC<pageProps> = ({}) => {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">$45,231.89</div>
-                  <p className="text-xs text-muted-foreground">
+                  <div className="text-2xl font-bold">
+                    {" "}
+                    {userData
+                      ? `$${Number(userData.balance).toLocaleString()}`
+                      : "Loading..."}
+                  </div>
+                  {/* <p className="text-xs text-muted-foreground">
                     +20.1% from last month
-                  </p>
+                  </p> */}
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Total Expenses
+                    Current Interest Rate:
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -90,15 +109,17 @@ const page: FC<pageProps> = ({}) => {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+2350</div>
-                  <p className="text-xs text-muted-foreground">
+                  <div className="text-2xl font-bold">4%</div>
+                  {/* <p className="text-xs text-muted-foreground">
                     +180.1% from last month
-                  </p>
+                  </p> */}
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Sales</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Total Deposited
+                  </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -115,15 +136,15 @@ const page: FC<pageProps> = ({}) => {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">+12,234</div>
-                  <p className="text-xs text-muted-foreground">
+                  {/* <p className="text-xs text-muted-foreground">
                     +19% from last month
-                  </p>
+                  </p> */}
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Active Now
+                    Total Withdrawn
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -140,9 +161,9 @@ const page: FC<pageProps> = ({}) => {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">+573</div>
-                  <p className="text-xs text-muted-foreground">
+                  {/* <p className="text-xs text-muted-foreground">
                     +201 since last hour
-                  </p>
+                  </p> */}
                 </CardContent>
               </Card>
             </div>
@@ -172,4 +193,4 @@ const page: FC<pageProps> = ({}) => {
   );
 };
 
-export default page;
+export default Page;

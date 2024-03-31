@@ -6,8 +6,8 @@ const Footer = () => {
 
 
   return (
-    <div className="bg-green-800 text-white py-6 px-4 md:px-6">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className=" bg-green-800 text-white py-6 px-4 md:px-6">
+      <div className=" container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="flex flex-col items-center md:items-start">
             <div>
           <Image src="/2018-cb-ca-white.png" alt="Commerce Bank" width={88} height={12} className="object-contain" />

@@ -20,13 +20,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+      <div className="flex flex-col min-h-screen">
+
         <Navbar />
-        <div>
+        <div className="flex-1">
           {children}
 
         </div>{" "}
         <Footer />
         <Toaster/>
+        </div>
       </body>
     </html>
   );
