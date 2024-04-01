@@ -47,7 +47,7 @@ const Page = ({}) => {
   }, [user.id]);
 
   return (
-    <div className="container">
+<div className="container md:py-32 lg:py-32">
       <div className="flex-1 space-y-4 py-6 pt-6">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-3xl font-bold tracking-tight">
