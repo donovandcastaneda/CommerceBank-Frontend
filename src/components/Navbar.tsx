@@ -16,6 +16,7 @@ import {
 } from "./ui/credenza";
 import SignInForm from "./SignInForm";
 import RegisterForm from "./RegisterForm";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);

@@ -40,6 +40,7 @@ const Page = ({}) => {
         setUserData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
+        console.log(error)
       }
     };
 

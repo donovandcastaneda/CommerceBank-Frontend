@@ -59,14 +59,13 @@ export default function SignInForm() {
 
           if (response.status === 200) {
               setAuthHeader(response.data.token);
-              toast({ title: "Login successful!"}); // Show success toast
+              toast({ title: "Login successful!"}); 
   
-              // Check if response.data.user and response.data.user.id exist
               if (response.data && response.data.id) {
                   const id = response.data.id;
                   router.push(`/dashboard/${id}`);
+
               } else {
-                  // Handle the case where user or user.id is undefined
                   console.error("Missing user data in response:", response.data);
                   throw new Error("User data is missing in the response");
               }

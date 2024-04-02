@@ -16,11 +16,7 @@ import { Input } from "@/components/ui/input";
 import { toast, useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import {
-  getAuthToken,
-  request,
-  setAuthHeader,
-} from "@/lib/helpers/axios_helper";
+import { setAuthHeader } from "@/lib/helpers/axios_helper";
 import axios from "axios";
 import { Toast } from "./ui/toast";
 import { useState } from "react";
@@ -36,7 +32,9 @@ const FormSchema = z.object({
     message: "Username must be at least 7 characters.",
   }),
   role: z.string(),
-  balance: z.number()
+  balance: z.number(),
+  totalDeposited: z.number(),
+  totalWithdrawn: z.number(),
 
   // .refine((data) => data.confirm === data.password, {
   //   message: "Password did not match",
@@ -53,44 +51,40 @@ export default function RegisterForm() {
       username: "",
       password: "",
       role: "USER",
-      balance: 10000
+      balance: 10000,
+      totalDeposited: 11000,
+      totalWithdrawn: 1000,
 
-      // confirm: "",
     },
   });
 
-  const { toast } = useToast()
-  const [isLoading, setIsLoading] = useState(false); 
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter(); // Initialize useRouter
 
-
-
-
   async function onRegister(values: any) {
-    setIsLoading(true)
+    setIsLoading(true);
+
 
     try {
-        const response = await axios.post("/register", values);
+      const response = await axios.post("/register", values);
 
-        if (response.status === 200) {
-            setAuthHeader(response.data.token);
-            toast({ title: "Registration successful!"}); // Show success toast
-            const id = response.data.id;
-            router.push(`/dashboard/${id}`);
-        } else {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
- 
+      if (response.status === 200) {
+        setAuthHeader(response.data.token);
+        toast({ title: "Registration successful!" }); // Show success toast
+        const id = response.data.id;
+        router.push(`/dashboard/${id}`);
+      } else {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
     } catch (error) {
-        setAuthHeader(null);
-        console.error("Registration failed:", error);
-        toast({ title: "Registration failed", variant: "destructive" }); // Show error toast
-
-    }
-    finally {
+      setAuthHeader(null);
+      console.error("Registration failed:", error);
+      toast({ title: "Registration failed", variant: "destructive" }); // Show error toast
+    } finally {
       setIsLoading(false); // End loading
     }
-}
+  }
 
   function onSubmit(values: any) {
     onRegister(values);
@@ -172,6 +166,22 @@ export default function RegisterForm() {
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name="balance"
+          render={({ field }) => <Input {...field} type="hidden" />}
+        />
+        <FormField
+          control={form.control}
+          name="totalDeposited"
+          render={({ field }) => <Input {...field} type="hidden" />}
+        />
+        <FormField
+          control={form.control}
+          name="totalWithdrawn"
+          render={({ field }) => <Input {...field} type="hidden" />}
+        />
+
         {/* <FormField
           control={form.control}
           name=""
@@ -191,9 +201,13 @@ export default function RegisterForm() {
             </FormItem>
           )}
         /> */}
-         <Button type="submit" className="w-full flex gap-2" disabled={isLoading}>
-  {isLoading ? <Loader2 className="animate-spin" /> : 'Register'}
-</Button>
+        <Button
+          type="submit"
+          className="w-full flex gap-2"
+          disabled={isLoading}
+        >
+          {isLoading ? <Loader2 className="animate-spin" /> : "Register"}
+        </Button>
       </form>
     </Form>
   );
