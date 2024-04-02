@@ -54,7 +54,6 @@ export default function RegisterForm() {
       balance: 10000,
       totalDeposited: 11000,
       totalWithdrawn: 1000,
-
     },
   });
 
@@ -64,7 +63,6 @@ export default function RegisterForm() {
 
   async function onRegister(values: any) {
     setIsLoading(true);
-
 
     try {
       const response = await axios.post("/register", values);

@@ -1,65 +1,85 @@
 import Link from "next/link"
 import Image from "next/image"
+import { ChevronRightIcon, InstagramIcon, } from "lucide-react";
 
 
 const Footer = () => {
 
 
   return (
-    <div className=" bg-green-800 text-white py-6 px-4 md:px-6">
-      <div className=" container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="flex flex-col items-center md:items-start">
-            <div>
-          <Image src="/2018-cb-ca-white.png" alt="Commerce Bank" width={88} height={12} className="object-contain" />
-          </div>
-          
+    <footer className="bg-green-800 dark:bg-gray-950">
+      <div className="container grid  px-4 py-12 md:px-6 md:grid-cols-[1fr_300px] lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_500px]">
         
+       
+        <div className="space-y-3 text-white">
+          <div className=" ">
+            <h3 className="font-semibold">Contact Us</h3>
+            <p className="text-sm leading-loose">
+              Have questions? Were here to help. Contact us by phone, email or in person at one of our branches.
+            </p>
+          </div>
+          <div className=" ">
+            <h3 className="font-semibold">Call Us</h3>
+            <p className="text-sm leading-loose">1-800-123-4567</p>
+          </div>
+          <div className="">
+            <h3 className="font-semibold">Email Us</h3>
+            <p className="text-sm leading-loose">support@Commercebank.com</p>
+          </div>
         </div>
-        <div className="flex flex-col items-center md:items-start">
-          <h3 className="font-semibold">Quick Links</h3>
-          <Link className="mt-2 hover:underline" href="#">
-            About Us
-          </Link>
-          <Link className="hover:underline" href="#">
-            Services
-          </Link>
-          <Link className="hover:underline" href="#">
-            Contact
-          </Link>
+        <div className="space-y-3 text-white">
+          <div className="">
+            <h3 className="font-semibold">About Commerce Bank</h3>
+            <p className="text-sm leading-loose">
+              Learn more about our mission, values, and commitment to our customers.
+            </p>
+          </div>
+          <div className="">
+            <h3 className="font-semibold">Privacy Policy</h3>
+            <p className="text-sm leading-loose">
+               Read our Privacy Policy to understand how we protect your 
+              information.
+            </p>
+          </div>
+          <div className="">
+            <h3 className="font-semibold">Terms of Service</h3>
+            <p className="text-sm leading-loose">
+              By using our website, you agree to our Terms of Service. 
+            </p>
+          </div>
         </div>
-        <div className="flex flex-col items-center md:items-start">
-          <h3 className="font-semibold">Follow Us</h3>
-          <div className="flex mt-2 space-x-4">
-            <Link className="hover:text-blue-500" href="#">
-              <FacebookIcon className="h-6 w-6" />
-              <span className="sr-only">Facebook</span>
-            </Link>
-            <Link className="hover:text-blue-400" href="#">
-              <TwitterIcon className="h-6 w-6" />
-              <span className="sr-only">Twitter</span>
-            </Link>
-            <Link className="hover:text-blue-600" href="#">
-              <LinkedinIcon className="h-6 w-6" />
-              <span className="sr-only">LinkedIn</span>
-            </Link>
+        <div className="text-white py-5 flex flex-col md:gap-2 md:flex-row lg:flex-col xl:flex-row items-start justify-start">
+          <div className="grid gap-2">
+            <h3 className="font-semibold">Follow Us</h3>
+            <div className="flex items-center gap-2">
+              <FacebookIcon className="h-4 w-4 opacity-60 hover:opacity-100 transition-opacity" />
+              <TwitterIcon className="h-4 w-4 opacity-60 hover:opacity-100 transition-opacity" />
+              <InstagramIcon className="h-4 w-4 opacity-60 hover:opacity-100 transition-opacity" />
+              <LinkedinIcon className="h-4 w-4 opacity-60 hover:opacity-100 transition-opacity" />
+            </div>
           </div>
         </div>
       </div>
-      <div className="mt-6 border-t pt-6 text-center text-sm">
-        <p>© 2024 Commerce Bank. All rights reserved.</p>
-        {/* <p className="mt-2">
-          This site is protected by reCAPTCHA and the Google{" "}
-          <Link className="underline" href="#">
-            Privacy Policy
-          </Link>{" "}
-          and{" "}
-          <Link className="underline" href="#">
-            Terms of Service
-          </Link>{" "}
-          apply.
-        </p> */}
+      <div className="border-t border-gray-200 dark:border-gray-800">
+        <div className="text-white container flex items-center justify-between px-4 py-4 md:px-6">
+          <p className="text-xs">© 2024 Commerce Bank. All rights reserved.</p>
+          <nav className="flex gap-4">
+            <Link className="text-xs hover:underline underline-offset-4" href="#">
+              About 
+            </Link>
+            <Link className="text-xs hover:underline underline-offset-4" href="#">
+              Contact 
+            </Link>
+            <Link className="text-xs hover:underline underline-offset-4" href="#">
+              Privacy Policy
+            </Link>
+            <Link className="text-xs hover:underline underline-offset-4" href="#">
+              Terms & Conditions
+            </Link>
+          </nav>
+        </div>
       </div>
-    </div>
+    </footer>
   )
 }
 

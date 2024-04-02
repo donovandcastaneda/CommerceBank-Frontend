@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowRight, Globe, Menu, X } from "lucide-react";
 import { Button, buttonVariants } from "./ui/button";
 import {
   Credenza,
@@ -29,6 +29,7 @@ const Navbar = () => {
           className="z-40 flex font-semibold text-white whitespace-nowrap"
         >
           Commerce Bank
+
         </Link>
         <div className="sm:hidden flex items-center">
           <button onClick={() => setToggleMenu(!toggleMenu)}>
