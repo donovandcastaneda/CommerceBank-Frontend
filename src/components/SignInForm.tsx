@@ -23,10 +23,10 @@ import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
   username: z.string().min(7, {
-    message: "Username must be at least 7 characters.",
+    message: "Username is incorrect",
   }),
   password: z.string().min(7, {
-    message: "Username must be at least 7 characters.",
+    message: "Password is incorrect",
   }),
   // .refine((data) => data.confirm === data.password, {
   //   message: "Password did not match",

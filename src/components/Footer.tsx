@@ -64,16 +64,16 @@ const Footer = () => {
         <div className="text-white container flex items-center justify-between px-4 py-4 md:px-6">
           <p className="text-xs">© 2024 Commerce Bank. All rights reserved.</p>
           <nav className="flex gap-4">
-            <Link className="text-xs hover:underline underline-offset-4" href="#">
+            <Link className="text-xs hover:underline underline-offset-4" href="/about">
               About 
             </Link>
-            <Link className="text-xs hover:underline underline-offset-4" href="#">
+            <Link className="text-xs hover:underline underline-offset-4" href="/contact">
               Contact 
             </Link>
-            <Link className="text-xs hover:underline underline-offset-4" href="#">
+            <Link className="text-xs hover:underline underline-offset-4" href="/policy">
               Privacy Policy
             </Link>
-            <Link className="text-xs hover:underline underline-offset-4" href="#">
+            <Link className="text-xs hover:underline underline-offset-4" href="/terms">
               Terms & Conditions
             </Link>
             
