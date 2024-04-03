@@ -12,7 +12,7 @@ export default function Component() {
             <div className="space-y-2">
               <h1 className="text-3xl font-bold">Contact Us</h1>
               <p className="text-gray-500 dark:text-gray-400">
-                Have questions? Send us a message and we'll get back to you as
+                Have questions? Send us a message and well get back to you as
                 soon as possible.
               </p>
             </div>

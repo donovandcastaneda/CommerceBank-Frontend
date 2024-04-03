@@ -10,7 +10,7 @@ export default function TermsAndConditions() {
             <p>
               Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with
               and be bound by the following terms and conditions of use, which together with our privacy policy govern
-              Commerce Bank's relationship with you in relation to this website. If you disagree with any part of
+              Commerce Banks relationship with you in relation to this website. If you disagree with any part of
               these terms and conditions, please do not use our website.
             </p>
             <h2 className="text-2xl font-bold tracking-tighter sm:text-4xl">Use of the Website</h2>
