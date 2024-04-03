@@ -70,8 +70,6 @@ export default function RegisterForm() {
       if (response.status === 200) {
         setAuthHeader(response.data.token);
         toast({ title: "Registration successful!" }); // Show success toast
-        const id = response.data.id;
-        router.push(`/dashboard/${id}`);
       } else {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
