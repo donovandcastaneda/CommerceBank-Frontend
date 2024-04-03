@@ -81,7 +81,7 @@ export default function Home() {
               <div className="space-y-1.5">
                 <h3 className="text-xl font-bold">Custom Dashboard</h3>
                 <p className="text-gray-500 dark:text-gray-400">
-                  Personalized dashboard made with your finances in mind
+                  Personalized dashboard made with your finances in mind.
                 </p>
               </div>
             </div>
