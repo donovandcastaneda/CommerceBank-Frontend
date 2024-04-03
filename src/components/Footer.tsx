@@ -76,6 +76,7 @@ const Footer = () => {
             <Link className="text-xs hover:underline underline-offset-4" href="#">
               Terms & Conditions
             </Link>
+            
           </nav>
         </div>
       </div>
