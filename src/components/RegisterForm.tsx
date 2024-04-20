@@ -31,15 +31,17 @@ const FormSchema = z.object({
   password: z.string().min(7, {
     message: "Username must be at least 7 characters.",
   }),
+  confirm: z.string(),
   role: z.string(),
   balance: z.number(),
   totalDeposited: z.number(),
   totalWithdrawn: z.number(),
 
-  // .refine((data) => data.confirm === data.password, {
-  //   message: "Password did not match",
-  //   path: ["confirm"],
-  // }),
+  
+})
+.refine((data) => data.confirm === data.password, {
+  message: "Password did not match",
+  path: ["confirm"],
 });
 
 export default function RegisterForm() {
@@ -178,9 +180,9 @@ export default function RegisterForm() {
           render={({ field }) => <Input {...field} type="hidden" />}
         />
 
-        {/* <FormField
+        <FormField
           control={form.control}
-          name=""
+          name="confirm"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Confirm Password</FormLabel>
@@ -196,7 +198,7 @@ export default function RegisterForm() {
               <FormMessage />
             </FormItem>
           )}
-        /> */}
+        /> 
         <Button
           type="submit"
           className="w-full flex gap-2"

@@ -60,7 +60,7 @@ const Page = ({}) => {
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
             <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="analytics" disabled>
+            <TabsTrigger value="accounts">
               Accounts
             </TabsTrigger>
             <TabsTrigger value="reports" disabled>
@@ -205,6 +205,10 @@ const Page = ({}) => {
               </Card>
             </div>
           </TabsContent>
+        
+
+          <TabsContent value="accounts"></TabsContent>
+
         </Tabs>
       </div>
     </div>

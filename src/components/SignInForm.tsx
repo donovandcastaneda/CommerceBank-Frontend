@@ -28,11 +28,12 @@ const FormSchema = z.object({
   password: z.string().min(7, {
     message: "Password is incorrect",
   }),
-  // .refine((data) => data.confirm === data.password, {
-  //   message: "Password did not match",
-  //   path: ["confirm"],
-  // }),
-});
+  // confirm: z.string()
+}) 
+// .refine((data) => data.confirm === data.password, {
+//   message: "Password did not match",
+//   path: ["confirm"],
+// });
 
 export default function SignInForm() {
   const form =
@@ -130,9 +131,9 @@ export default function SignInForm() {
             </FormItem>
           )}
         />
-        {/* <FormField
+         {/* <FormField
           control={form.control}
-          name=""
+          name="confirm"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Confirm Password</FormLabel>
@@ -148,7 +149,7 @@ export default function SignInForm() {
               <FormMessage />
             </FormItem>
           )}
-        /> */}
+        />  */}
         <Button type="submit" className="w-full flex gap-2" disabled={isLoading}>
   {isLoading ? <Loader2 className="animate-spin" /> : 'Sign In'}
 </Button>
