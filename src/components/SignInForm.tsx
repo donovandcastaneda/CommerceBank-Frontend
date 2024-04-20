@@ -20,6 +20,7 @@ import axios from "axios";
 import { setAuthHeader } from "@/lib/helpers/axios_helper";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/authContext";
 
 const FormSchema = z.object({
   username: z.string().min(7, {
@@ -36,6 +37,7 @@ const FormSchema = z.object({
 // });
 
 export default function SignInForm() {
+  const { login } = useAuth();
   const form =
     useForm <
     z.infer<typeof FormSchema>>({
@@ -51,43 +53,43 @@ export default function SignInForm() {
     const router = useRouter(); 
 
 
-    async function onLogin(values: any) {
-      setIsLoading(true); 
+  //   async function onLogin(values: any) {
+  //     setIsLoading(true); 
   
-      try {
-          const response = await axios.post("/login", values);
+  //     try {
+  //         const response = await axios.post("/login", values);
       
 
-          if (response.status === 200) {
-              setAuthHeader(response.data.token);
-              toast({ title: "Login successful!"}); 
+  //         if (response.status === 200) {
+  //             setAuthHeader(response.data.token);
+  //             toast({ title: "Login successful!"}); 
   
-              if (response.data && response.data.id) {
-                  const id = response.data.id;
-                  router.push(`/dashboard/${id}`);
+  //             if (response.data && response.data.id) {
+  //                 const id = response.data.id;
+  //                 router.push(`/dashboard/${id}`);
 
-              } else {
-                  console.error("Missing user data in response:", response.data);
-                  throw new Error("User data is missing in the response");
-              }
+  //             } else {
+  //                 console.error("Missing user data in response:", response.data);
+  //                 throw new Error("User data is missing in the response");
+  //             }
   
-          } else {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-          }
+  //         } else {
+  //             throw new Error(`HTTP error! Status: ${response.status}`);
+  //         }
   
-      } catch (error) {
-          setAuthHeader(null);
-          console.error("Login failed:", error);
-          toast({ title: "Login failed", variant: "destructive" }); // Show error toast
-      }
-      finally {
-          setIsLoading(false); // End loading
-      }
-  }
+  //     } catch (error) {
+  //         setAuthHeader(null);
+  //         console.error("Login failed:", error);
+  //         toast({ title: "Login failed", variant: "destructive" }); // Show error toast
+  //     }
+  //     finally {
+  //         setIsLoading(false); // End loading
+  //     }
+  // }
   
   
     function onSubmit(values: any) {
-      onLogin(values);
+      login(values.username, values.password);
     }
 
   return (

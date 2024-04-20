@@ -13,39 +13,21 @@ import {
 } from "@/components/ui/card";
 import { Overview } from "../components/overview";
 import { RecentTransactions } from "../components/recent-transactions";
+import { User } from "@/components/types/types";
+import { useAuth } from "@/context/authContext";
 
 const Page = ({}) => {
 
-  type UserData = {
-    firstName: string;
-    lastName: string;
-    balance: number;
-    totalDeposited: number;
-    totalWithdrawn: number;
 
-
-    // add other user properties as needed
-  };
-
-  const [userData, setUserData] = useState<UserData | null>(null);
-  let user = useParams();
+  const { user, token, fetchUserDetails, isLoading } = useAuth();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/api/users/` + user.id
-        );
-        console.log(response)
-        setUserData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        console.log(error)
-      }
-    };
+    if (token && user?.id) {
+      fetchUserDetails(user.id, token);
+    }
+  }, [user?.id, token, fetchUserDetails]);
 
-    fetchData();
-  }, [user.id]);
+ 
 
   return (
 <div className="container md:py-32 lg:py-32">
@@ -53,8 +35,8 @@ const Page = ({}) => {
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-3xl font-bold tracking-tight">
             {" "}
-            Dashboard: {userData ? userData.firstName : "Loading..."}{" "}
-            {userData ? userData.lastName : ""}
+            Dashboard: {user ? user.firstName : "Loading..."}{" "}
+            {user ? user.lastName : ""}
           </h2>
         </div>
         <Tabs defaultValue="overview" className="space-y-4">
@@ -93,8 +75,8 @@ const Page = ({}) => {
                 <CardContent>
                   <div className="text-2xl font-bold">
                     {" "}
-                    {userData
-                      ? `$${Number(userData.balance).toLocaleString()}`
+                    {user
+                      ? `$${Number(user.balance).toLocaleString()}`
                       : "Loading..."}
                   </div>
                   {/* <p className="text-xs text-muted-foreground">
@@ -149,8 +131,8 @@ const Page = ({}) => {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">    {userData
-                      ? `$${Number(userData.totalDeposited).toLocaleString()}`
+                  <div className="text-2xl font-bold">    {user
+                      ? `$${Number(user.totalDeposited).toLocaleString()}`
                       : "Loading..."}</div>
                   {/* <p className="text-xs text-muted-foreground">
                     +19% from last month
@@ -176,8 +158,8 @@ const Page = ({}) => {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">    {userData
-                      ? `$${Number(userData.totalWithdrawn).toLocaleString()}`
+                  <div className="text-2xl font-bold">    {user
+                      ? `$${Number(user.totalWithdrawn).toLocaleString()}`
                       : "Loading..."}</div>
                   {/* <p className="text-xs text-muted-foreground">
                     +201 since last hour
