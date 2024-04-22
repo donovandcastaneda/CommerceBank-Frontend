@@ -18,6 +18,7 @@ import SignInForm from "./SignInForm";
 import RegisterForm from "./RegisterForm";
 import { useRouter } from "next/router";
 import { useAuth } from "@/context/authContext";
+import { UserNav } from "./UserNav";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -45,12 +46,10 @@ const Navbar = () => {
         <div className="hidden sm:flex items-center space-x-4">
           {user ? (
             <>
-              <Link href="/dashboard">
+              <Link href="/dashboard/">
                 <Button variant="secondary">Dashboard</Button>
               </Link>
-              <Button variant="secondary" onClick={logout}>
-                Logout
-              </Button>
+              <UserNav/>
             </>
           ) : (
             <>
@@ -112,9 +111,22 @@ const Navbar = () => {
               <Link href="/dashboard">
                 <Button variant="secondary">Dashboard</Button>
               </Link>
-              <Button variant="secondary" onClick={logout}>
-                Logout
-              </Button>
+              <Link href="/dashboard">
+                <Button variant="secondary">Profile</Button>
+              </Link>
+              <Link href="/dashboard">
+                <Button variant="secondary">Settings</Button>
+              </Link>
+              <Link href="/dashboard">
+                <Button variant="secondary">Add Acount</Button>
+              </Link>
+              <Link href="/dashboard">
+                <Button variant="secondary">Add Transaction</Button>
+              </Link>
+              <Button variant="secondary" onClick={logout}>Logout</Button>
+
+
+           
             </>
           ) : (
             <>
