@@ -24,6 +24,7 @@ const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const { user, logout } = useAuth();
 
+
   return (
     <nav className="sticky inset-x-0 top-0 z-30 h-14 w-full border-b border-gray-200 bg-green-800 backdrop-blur-lg transition-all">
       <div className="container flex h-14 items-center justify-between">
@@ -46,10 +47,10 @@ const Navbar = () => {
         <div className="hidden sm:flex items-center space-x-4">
           {user ? (
             <>
-              <Link href="/dashboard/">
+              <Link href={`/dashboard/1`}>
                 <Button variant="secondary">Dashboard</Button>
               </Link>
-              <UserNav/>
+              <UserNav />
             </>
           ) : (
             <>
@@ -123,10 +124,9 @@ const Navbar = () => {
               <Link href="/dashboard">
                 <Button variant="secondary">Add Transaction</Button>
               </Link>
-              <Button variant="secondary" onClick={logout}>Logout</Button>
-
-
-           
+              <Button variant="secondary" onClick={logout}>
+                Logout
+              </Button>
             </>
           ) : (
             <>

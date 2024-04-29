@@ -40,10 +40,12 @@ export function UserNav() {
             Profile
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
+          <Link href={`/dashboard/${user?.id}/settings`}>
           <DropdownMenuItem>
             Settings
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
+          </Link>
           <Link href={`/dashboard/${user?.id}/add-account`}>
             <DropdownMenuItem>Add Acount</DropdownMenuItem>
           </Link>

@@ -44,8 +44,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       })
       .catch((error) => {
         console.error("Error fetching user details:", error);
-        console.log(error)
-        logout();
+        console.log(error)        
+        // logout();
       })
       .finally(() => {
         setIsLoading(false);

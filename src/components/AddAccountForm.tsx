@@ -68,8 +68,12 @@ export default function RegisterForm() {
     
 
     try {
-      const response = await axios.post("/api/accounts", values);
-
+      const response = await axios.post("/api/accounts", values, {
+        headers: {
+          Authorization: `Bearer ${token}`,  // Assuming 'Bearer' token type
+        }
+     });
+     
       if (response.status === 200 || 201) {
         setAuthHeader(response.data.token);
         toast({ title: "Account creation successful!" });
@@ -79,6 +83,7 @@ export default function RegisterForm() {
     } catch (error) {
       setAuthHeader(null);
       console.error("Account  creation failed:", error);
+      console.log(error)
       console.log(values)
       toast({ title: "Account  creation failed", variant: "destructive" });
     } finally {
