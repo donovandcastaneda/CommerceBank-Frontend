@@ -18,10 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  useEffect(() => {
-    const theme = localStorage.getItem('theme') || 'light'; // Default to 'light'
-    document.body.className = theme; // Apply 'light' or 'dark'
-  }, []);
+
   
   return (
     <html lang="en">

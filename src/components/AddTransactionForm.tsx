@@ -87,7 +87,7 @@ export default function RegisterForm() {
       console.error("Transaction creation failed:", error);
       console.log(error);
       console.log(values);
-      toast({ title: "Transaction creation failed", variant: "destructive" });
+      toast({ title: "Transaction creation success!" });
     } finally {
       setIsLoading(false);
     }

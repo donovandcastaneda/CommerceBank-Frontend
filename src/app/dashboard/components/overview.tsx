@@ -95,16 +95,14 @@ export function Overview() {
   };
 
   const [userData, setUserData] = useState<UserData | null>(null);
-  const [graphData, setGraphData] = useState<GraphData[]>([]); 
+  const [graphData, setGraphData] = useState<GraphData[]>([]);
 
   let user = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8080/api/users/` + user.id
-        );
+        const response = await axios.get(`https://cbproject.xyz/api/users/` + user.id);
         console.log(response);
         setUserData(response.data);
       } catch (error) {
